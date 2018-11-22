@@ -31,6 +31,9 @@
       <div data-key="75" class="key">
         <kbd>K</kbd> <span class="sound">tom</span>
       </div>
+      <div data-key="76" class="key">
+        <kbd>L</kbd> <span class="sound">tink</span>
+      </div>
     </div>
 
     <audio data-key="65" src="sounds/clap.wav"></audio>
@@ -45,14 +48,20 @@
 
     <script>
       window.addEventListener("keydown", function(e) {
-        // console.log(e.keyCode);
+        console.log(e.keyCode);
 
         //Query the audio element
         let audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
         // console.log(audio);
         if (!audio) return;
 
+        //Resetting time to cancel the play sound and restart when play is hit
+        audio.currentTime = 0;
         audio.play();
+
+        // Target the key to give them a class
+        let key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        key.classList.add("playing");
       });
     </script>
   </body>
